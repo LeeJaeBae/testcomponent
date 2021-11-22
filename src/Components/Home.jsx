@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import './murkyowl_export.css'
 const Home = () => {
-  return <div id="murkyowl_den_06__31">
+  return <Link to='/scroll'>
+  <div id="murkyowl_den_06__31">
 	<img id="Art-2-new-lamps-set-up-11_gia" src="/img/../Art-2-new-lamps-set-up-11_gia.png" srcset="/img/../Art-2-new-lamps-set-up-11_gia.png 1x, /img/../Art-2-new-lamps-set-up-11_gia@2x.png 2x" />
 		
 	<div id="HONGDAE_gic">
@@ -1875,7 +1877,7 @@ const Home = () => {
 			</ellipse>
 		</svg>
 	</div>
-</div>
+</div></Link>
 }
 
 export default Home;

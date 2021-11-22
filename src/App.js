@@ -114,7 +114,8 @@ function App() {
 					<Route exact path='/price' component={PriceGuide} />
 					<Route exact path='/main' component={StudioMain} />
 					<Route exact path='/info' component={StudioInfo} />
-					<Route exact path='/' component={FullpageWrapper} />
+					<Route exact path='/scroll' component={FullpageWrapper} />
+					<Route exact path='/' component={Home} />
 				</Switch>
 			</BrowserRouter>
 		</div>
