@@ -4,14 +4,44 @@ import PriceGuide from './Components/PriceGuide';
 import StudioInfo from './Components/StudioInfo';
 import StudioMain from './Components/StudioMain';
 
+import Main from './img/main.png';
+import Info from './img/info.png';
+import Guide from './img/guide.png';
+
 import ReactFullpage from '@fullpage/react-fullpage';
 
-import 'swiper/swiper-bundle.css';
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
+// import 'swiper/swiper-bundle.css';
+
 import styled from 'styled-components';
 // import Swiper core and required modules
-import SwiperCore, { Pagination } from 'swiper';
-import React from 'react';
+
+import React, { useEffect } from 'react';
+import fullpage from 'fullpage.js';
+
+const Test = () => {
+	useEffect(() => {
+		new fullpage('#fullpage', {
+			anchors: ['firstPage', 'secondPage', 'thirdPage'],
+			normalScrollElements: '#firstPage',
+		});
+	}, []);
+	return (
+		<div id='fullpage'>
+			<div id='firstPage' class='section'>
+				{/* <img src={Main} /> */}
+				<Container>
+					<StudioMain />
+				</Container>
+			</div>
+			<div id='secondPage' class='section'>
+				<img src={Info} />
+			</div>
+			<div id='thirdPage' class='section'>
+				<img src={Guide} />
+			</div>
+		</div>
+	);
+};
 
 class FullpageWrapper extends React.Component {
 	onLeave(origin, destination, direction) {
@@ -23,33 +53,34 @@ class FullpageWrapper extends React.Component {
 	render() {
 		return (
 			<ReactFullpage
-				// normalScrollElements='.test'
+				normalScrollElements='#test'
 				scrollOverflow={false}
 				onLeave={this.onLeave.bind(this)}
 				afterLoad={this.afterLoad.bind(this)}
 				render={({ state, fullpageApi }) => {
-					state && state.origin && state.origin.index === 0 && fullpageApi.setAutoScrolling(false);
-					state && state.origin && state.origin.index !== 0 && fullpageApi.setAutoScrolling(true);
-
+					// state && state.origin && state.origin.index === 0 && fullpageApi.setAutoScrolling(false);
+					// state && state.origin && state.origin.index !== 0 && fullpageApi.setAutoScrolling(true);
+					// console.log('test');
 					return (
-						<div id='fullpage-wrapper'>
-							<div className='section active'>
-								<Container>
-									<StudioInfo />
-								</Container>
-							</div>
-							<div className='section test'>
-								<Container2
-									onScroll={(e) => {
-										console.log(e);
-									}}>
+						<div>
+							{/* <StudioInfo /> */}
+
+							<div id='fullpage-wrapper'>
+								<div id='test' className='section active test'>
+									<img src={Main} />
+								</div>
+								<div className='section'>
+									<img src={Info} />
+									{/* <Container2>
 									<StudioMain />
-								</Container2>
-							</div>
-							<div className='section'>
-								<Container>
+								</Container2> */}
+								</div>
+								<div className='section'>
+									<img src={Guide} />
+									{/* <Container>
 									<PriceGuide />
-								</Container>
+								</Container> */}
+								</div>
 							</div>
 						</div>
 					);
@@ -77,34 +108,34 @@ const Container2 = styled.div`
 `;
 
 // install Swiper modules
-SwiperCore.use([Pagination]);
+// SwiperCore.use([Pagination]);
 
-const Test = () => {
-	return (
-		<Swiper
-			direction={'vertical'}
-			pagination={{
-				clickable: true,
-			}}
-			className='mySwiper'>
-			<SwiperSlide>
-				<Container>
-					<StudioInfo />1
-				</Container>
-			</SwiperSlide>
-			<SwiperSlide>
-				<Container>
-					<StudioMain />2
-				</Container>
-			</SwiperSlide>
-			<SwiperSlide>
-				<Container>
-					<PriceGuide />3
-				</Container>
-			</SwiperSlide>
-		</Swiper>
-	);
-};
+// const Test = () => {
+// 	return (
+// 		<Swiper
+// 			direction={'vertical'}
+// 			pagination={{
+// 				clickable: true,
+// 			}}
+// 			className='mySwiper'>
+// 			<SwiperSlide>
+// 				<Container>
+// 					<StudioInfo />1
+// 				</Container>
+// 			</SwiperSlide>
+// 			<SwiperSlide>
+// 				<Container>
+// 					<StudioMain />2
+// 				</Container>
+// 			</SwiperSlide>
+// 			<SwiperSlide>
+// 				<Container>
+// 					<PriceGuide />3
+// 				</Container>
+// 			</SwiperSlide>
+// 		</Swiper>
+// 	);
+// };
 
 function App() {
 	return (
@@ -114,7 +145,7 @@ function App() {
 					<Route exact path='/price' component={PriceGuide} />
 					<Route exact path='/main' component={StudioMain} />
 					<Route exact path='/info' component={StudioInfo} />
-					<Route exact path='/scroll' component={FullpageWrapper} />
+					<Route exact path='/scroll' component={Test} />
 					<Route exact path='/' component={Home} />
 				</Switch>
 			</BrowserRouter>
